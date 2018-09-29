@@ -1,6 +1,6 @@
 # SBT basics
 
-Usually, and also in this course, sbt is used for building, testing, running and submitting assignments. This tutorial explains some sbt commands that you can use. 
+Usually, and also in this course, sbt is used for **building**, **testing**, **running** and **submitting assignments**. This tutorial explains some sbt commands that you can use. 
 
 ## What SBT is?
 
@@ -22,74 +22,112 @@ Then we have some extra commands, such as:
 In sbt's terminology, the _base_ or _project's root directory_ is the directory containing the project. So if you go into any SBT project, you'll see a _build.sbt_ declared in the top-level directory that is, the _base_ directory. 
 
 
-### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+SBT uses the same directory structure as _Maven_ for source files by default (all paths are relative to the base directory):
 
 ```
-Give the example
+	src/
+		main/
+			resources/
+				<files to include in the main jar>
+			scala/
+				<main Scala sources>
+			java
+				<main Java sources>
+		test/
+			resources/
+				<files to include in the test jar>
+			scala/
+				<main Scala sources>
+			java
+				<main Java sources>
 ```
 
-And repeat
+Other directories in _src/_ will be ignored. 
+
+### SBT build definition 
+
+We already mentioned the _build.sbt_ file. There are ther sbt files in a project subdirectory. 
+
+The _project_ folder can contain _.scala_ files, which are combined with _.sbt_ files to form the complete build definition. 
+
+## SBT tasks
+
+### Starting up sbt
+
+In order to start _sbt_, open a terminal and navigate tot the directory of the project you are working on (where the _build.sbt_ file is). Typing _sbt_ will open the sbt command prompt. 
 
 ```
-until finished
+$ cd /project-path
+$ sbt
+# This is the sbt shell
+>
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+If you are using some IDEs, such as IntelliJ IDEA, you maybe already have a _sbt_ shell already opened.
 
-## Running the tests
+### Running the Scala interpreter inside SBT
 
-Explain how to run the automated tests for this system
+The Scala interpreter is different than the SBT command line.
 
-### Break down into end to end tests
-
-Explain what these tests test and why
+However, you can start the Scala interpreter inside sbt using the _console_ task. The interpreter (also called **REPL**, for _read-eval-print loop_) is useful for trying out snippets of Scala code. When the REPL is executed from SBT, all your code in the SBT project will also be loaded and you will be able to access it from the interpreter. That's why the Scala REPL can only start up if there are no compilation errors in your code. 
 
 ```
-Give an example
+> console
+[info] Starting scala interpreter...
+Welcome to Scala version 2.11.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_04-ea).
+Type in expressions to have them evaluated.
+Type :help for more information.
+
+scala> println("Hello World")                                          # This is the Scala REPL, type some Scala code
+Hello World
 ```
 
-### And coding style tests
+### Compiling your Code
 
-Explain what these tests test and why
+The compile task will compile the source code of an assingment which is located in the directory _src/main/scala_. 
 
 ```
-Give an example
+> compile
+[info] Compiling 4 Scala sources to /Users/aleksandar/example/target/scala-2.11/classes...
+[success] Total time: 1 s, completed Mar 21, 2013 11:04:46 PM
+> 
 ```
 
-## Deployment
+If the source code contains errors, the error messages from the compiler will be displayed. 
 
-Add additional notes about how to deploy this on a live system
+### Testing your code
+The directory _src/test/scala_ contains unit tests for the project. In order to run these tests in sbt, you can use the test command.
 
-## Built With
+```
+> test
+[info] ListsSuite:
+[info] - one plus one is two
+[info] - sum of a few numbers *** FAILED ***
+[info]   3 did not equal 2 (ListsSuite.scala:23)
+[info] - max of a few numbers
+[error] Failed: : Total 3, Failed 1, Errors 0, Passed 2, Skipped 0
+[error] Failed tests:
+[error]   example.ListsSuite
+[error] {file:/Users/luc/example/}assignment/test:test: Tests unsuccessful
+[error] Total time: 5 s, completed Aug 10, 2012 10:19:53 PM
+> 
+```
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+### Running your code
+If your project has an object with a main method (or an object extending the trait App), then you can run the code in _sbt_ easily by typing _run_. In case sbt finds multiple main methods, it will ask you which one you'd like to execute. 
 
-## Contributing
+```
+> run
+Multiple main classes detected, select one to run:
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+ [1] example.Lists
+ [2] example.M2
 
-## Versioning
+Enter number: 1
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+[info] Running example.Lists 
+main method!
+[success] Total time: 33 s, completed Aug 10, 2012 10:25:06 PM
+>
+```
 
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
