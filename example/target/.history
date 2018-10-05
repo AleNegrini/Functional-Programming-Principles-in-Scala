@@ -1,0 +1,11 @@
+;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers" ;*/*:dumpStructureTo /private/var/folders/gd/tl_kxc616bdghkj6psgqs7h00000gn/T/sbt-structure.xml; session clear-all
+sbtVersion
+console
+scala
+;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers" ;*/*:dumpStructureTo /private/var/folders/gd/tl_kxc616bdghkj6psgqs7h00000gn/T/sbt-structure.xml; session clear-all
+scala
+3+4
+console
+;reload; set _root_.org.jetbrains.sbt.StructureKeys.sbtStructureOptions in Global := "download resolveClassifiers" ;*/*:dumpStructureTo /private/var/folders/gd/tl_kxc616bdghkj6psgqs7h00000gn/T/sbt-structure1.xml; session clear-all
+all {file:/Users/alessandronegrini/IdeaProjects/Functional-Programming-Principles-in-Scala/example/}root/products {file:/Users/alessandronegrini/IdeaProjects/Functional-Programming-Principles-in-Scala/example/}root/test:products
+submit alessandro.negrini@axa.it 0jw6frNren0JDQJy
